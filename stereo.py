@@ -4,7 +4,7 @@ import os
 
 def load_images(folder):
     left_path=os.path.join(folder, "im0.png")
-    right_path=os.path.join(folder, "img1.png")
+    right_path=os.path.join(folder, "im1.png")
     left=cv2.imread(left_path, cv2.IMREAD_GRAYSCALE)
     right=cv2.imread(right_path, cv2.IMREAD_GRAYSCALE)
     if left is None:
@@ -21,7 +21,7 @@ def compute_disparity(left, right, num_disparities, block_size=15):
     return disparity
 
 #disparity map
-def visual_disparity(disparity, output_path, color_output_path):
+def save_disparity(disparity, output_path, color_output_path):
     #valid disparity values are greater than zero
     valid=disparity>0.
     disparity_normalized = np.zeros_like(disparity, dtype=np.uint8)
