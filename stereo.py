@@ -48,5 +48,21 @@ def visual_disparity(disparity, output_path, color_output_path):
     print(f"Saved disparity map: {output_path}")
     print(f"Saved color disparity map: {color_output_path}")
 
+#calculate depth at a specific pixel
+def calculate_depth(x, y, disparity, fx, baseline, doffs):
+    d=disparity[y, x]
+    if d <=0:
+        return None, d
+    
+    effective_disparity=d+doffs
+
+    if effective_disparity <=0:
+        return None, d
+
+    baseline_m = baseline / 1000.0   #convert baseline to meters
+
+    #Depth=(focal length * baseline)/(disparity+doffs)
+    depth = (fx * baseline_m)/effective_disparity
+    return depth, d
 
 
